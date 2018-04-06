@@ -79,5 +79,20 @@ public class ShiftCipher
 
         return new String(english);
     }
+    
+    /**
+     * This method will return an array of Strings with 26 elements. One element
+     * for each alphabetic shift.
+     * @param s The string to decode
+     * @return The array of Strings containing the possible broken code
+     */
+    public static String[] breakShift(String s)
+    {
+        String[] possible = new String[26];
+        for(int i='a', j=0; i<='z'; i++, j++)
+            possible[j]=decode(s,(char)i);
+            
+        return possible;
+    }
 
 }//end class
