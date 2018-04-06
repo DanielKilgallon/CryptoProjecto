@@ -1,4 +1,7 @@
 package javaapplication3;
+
+import java.util.Arrays;
+
 public class ShiftTest
 {
     
@@ -30,6 +33,14 @@ public class ShiftTest
 /*
         System.out.println("English: " + bMsg);
         System.out.println("Cryptic: " + ShiftCipher.encode(bMsg,'c'));
+        
 */
+       
+        //testing the break method in the ShiftCipher class
+        String cryptic = "SPWWZXJYLXPTDTYTRZXZYEZJLJZFVTWWPOXJQLESPCACPALCPEZOTP";
+        String[] p = ShiftCipher.breakShift(cryptic);
+        for(String s: p)
+            System.out.println(s);
+
     }
 }
