@@ -1,12 +1,10 @@
 package javaapplication3;
 
-public class ShiftTest
-{
+public class CipherTest {
 
     //this could help in breaking the shift cipher: http://practicalcryptography.com/cryptanalysis/stochastic-searching/cryptanalysis-caesar-cipher/
 
-    public static void main(String[] a)
-    {
+    public static void main(String[] a) {
         //String lMsg = "Hello. My name is Inigo Montoya. You killed my father. Prepare to die.";
         //String lMsg = "UUUMMMMTHISISATASTYBURGERMINDIFIHAVESOMEOFYOURTASTBEVERAGETOWASHTHISDOWNWITH";
         //String lMsg = "efgfoe uif fbtu xbmm pg uif dbtumf";
@@ -28,11 +26,17 @@ public class ShiftTest
         System.out.println(ShiftCipher.decode(code3, 'O'));
         System.out.println(ShiftCipher.decode(code4, 'R'));
         System.out.println(ShiftCipher.decode(code5, 'D'));
-/*
+        /*
         System.out.println("English: " + bMsg);
         System.out.println("Cryptic: " + ShiftCipher.encode(bMsg,'c'));
 
-*/
+        */
+        //testing the break method in the ShiftCipher class
+        String cryptic = "SPWWZXJYLXPTDTYTRZXZYEZJLJZFVTWWPOXJQLESPCACPALCPEZOTP";
+        String[] p = ShiftCipher.breakShift(cryptic);
+        for (String s : p)
+            System.out.println(s);
+
 
         //Atbash Testing
         String toEncodeAtbash = "This is an atbash test message."; // encoded answer: Gsrh rh zm zgyzhs gvhg nvhhztv
@@ -42,12 +46,5 @@ public class ShiftTest
         System.out.println("Atbash encoding: " + AtbashCipher.encode(toEncodeAtbash));
         System.out.println("Atbash decoding: " + AtbashCipher.decode(toDecodeAtbash));
         //AtbashCipher.breakCode(toBreakAtbash);
-
-        //testing the break method in the ShiftCipher class
-        String cryptic = "SPWWZXJYLXPTDTYTRZXZYEZJLJZFVTWWPOXJQLESPCACPALCPEZOTP";
-        String[] p = ShiftCipher.breakShift(cryptic);
-        for(String s: p)
-            System.out.println(s);
-
     }
 }

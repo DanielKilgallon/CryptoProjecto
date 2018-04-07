@@ -1,4 +1,4 @@
-package sample;
+package javaapplication3;
 
 /**
  * Encodes, decodes, and 'breaks' Atbash algorithm
