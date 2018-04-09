@@ -1,4 +1,4 @@
-package sample;
+package javaapplication3;
 
 public class Controller {
 }
