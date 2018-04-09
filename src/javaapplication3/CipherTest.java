@@ -33,9 +33,17 @@ public class CipherTest {
         */
         //testing the break method in the ShiftCipher class
         String cryptic = "SPWWZXJYLXPTDTYTRZXZYEZJLJZFVTWWPOXJQLESPCACPALCPEZOTP";
-        String[] p = ShiftCipher.breakShift(cryptic);
+        String[] p = ShiftCipher.breakCode(cryptic);
         for (String s : p)
             System.out.println(s);
+
+        //Repeating Keyword Testing
+        String EthanImSorry = "peflxpqsilqsyttinnuxxdexttqwbnavwedxhfav";
+        String Declaration  = "peflxpqsilqsyttinnuxxdexttqwbnavwedxhfavfayskebikfqgmuzmhnqwmanpbstnnsfmveurludiwoyiltugmrmrjuupbtktkohmwerskttivoyqhnpiyezgxpdsfofimhqkxnqvtliiefmvxazhleoykeflxbxilsurzsajeiniktkxhogvlexzxsmrwogvioexxruxrdaskdmmgazhxsfeuluwattmlcarltuxntusgfavmhqygifiwsfemeesyayikioetlxpxguweafmoebspedwaedibnsvtnfiwsteelnioeexxdurtcarzrqwlorxaegrbtqhltmxxsilbctwaaxpvozwbsfsyaeigafitnplhueihfdiirqwxnfemihil";
+        System.out.println("this is a secret message: " + RepeatingKeywordCipher.encode("this is a secret message", "pizza"));
+        System.out.println("iphr xa z hmbqei ldshifd: " + RepeatingKeywordCipher.decode(EthanImSorry, "tame"));
+//        System.out.println("Declaraction of Independence: " + RepeatingKeywordCipher.breakCode(Declaration));
+        RepeatingKeywordCipher.breakCode(Declaration);
 
 
         //Atbash Testing
