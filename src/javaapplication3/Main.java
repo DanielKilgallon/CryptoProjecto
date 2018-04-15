@@ -154,6 +154,18 @@ public class Main extends Application {
         return true;
     }
 
+    private boolean validRepeat(String s)
+    {
+        if(s.length()==0)
+            return false;
+
+        for (int i = 0; i < s.length(); i++) {
+            if(!Character.isLetter(s.charAt(i)))
+                return false;
+        }
+        return true;
+    }
+
     private void setupInputToOutput()
     {
         if(tbtnEncode.isSelected())
@@ -176,7 +188,12 @@ public class Main extends Application {
                 //System.out.println("Repeat listener " + input.getText());
                     /*gets the String from the repeat textfield and uses that as the keyword
                     input validation will be added later*/
-                output[2].setText(RepeatingKeywordCipher.encode(input.getText(), repeatKeyField.getText()));
+                if(!validRepeat(repeatKeyField.getText()))
+                {
+
+                }
+                else
+                    output[2].setText(RepeatingKeywordCipher.encode(input.getText(), repeatKeyField.getText()));
             }
         }
         if(tbtnDecode.isSelected())
@@ -197,7 +214,7 @@ public class Main extends Application {
             if(ciphers[2].isSelected() && !repeatKeyField.getText().isEmpty()) {
                     /*gets the String from the repeat textfield and uses that as the keyword
                     input validation will be added later*/
-                if(repeatKeyField.getText().isEmpty())
+                if(!validRepeat(repeatKeyField.getText()))
                 {
 
                 }
