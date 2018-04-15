@@ -54,6 +54,7 @@ public class Main extends Application {
 
         input = new TextArea();
         input.setPromptText("Your message here...");
+        input.setWrapText(true);
 
         output = new TextArea[NUM_CIPHERS];
         for (int i = 0; i < NUM_CIPHERS; i++) {
@@ -111,11 +112,99 @@ public class Main extends Application {
         vbMainContain.getChildren().add(process);
 
 
+        /*
+        Disables all fields when the "mode" is changed (switching from decode to encode)
+        additionally, clears the output boxes and key text fields
+         */
+        tgMethodChoice.selectedToggleProperty().addListener(event -> {
+            for(CheckBox cb : ciphers)
+                cb.setSelected(false);
+            for(TextArea ta : output) {
+                ta.setDisable(true);
+                ta.clear();
+            }
+            shiftField.clear();
+            shiftContainer.setDisable(true);
+            repeatKeyField.clear();
+            repeatContainer.setDisable(true);
+        });
+
+        //the cipher methods should be called here for active updates to the output areas
+        input.textProperty().addListener( e->{
+           setupInputToOutput();
+        });
+
+        process.setOnAction(e -> {setupInputToOutput();});
+
         Scene root = new Scene(vbMainContain, 300, 500);
         root.getStylesheets().add("resources/Main.css");
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(root);
         primaryStage.show();
+    }
+
+    private boolean validShift(String s)
+    {
+        if(s.isEmpty())
+            return false;
+        if(s.length()>1)
+            return false;
+        if(!Character.isLetter(s.charAt(0)))
+            return false;
+        return true;
+    }
+
+    private void setupInputToOutput()
+    {
+        if(tbtnEncode.isSelected())
+        {
+            if(ciphers[0].isSelected())
+                output[0].setText(AtbashCipher.encode(input.getText()));
+            if(ciphers[1].isSelected()) {
+                //System.out.println("Shift listener " + input.getText());
+                    /*gets the first character in the shift textfield and uses that as the ?-shift
+                    input validation will be added later*/
+                if(!validShift(shiftField.getText()))
+                {
+
+                }
+                else
+                    output[1].setText(ShiftCipher.encode(input.getText(), shiftField.getText().charAt(0)));
+
+            }
+            if(ciphers[2].isSelected()) {
+                //System.out.println("Repeat listener " + input.getText());
+                    /*gets the String from the repeat textfield and uses that as the keyword
+                    input validation will be added later*/
+                output[2].setText(RepeatingKeywordCipher.encode(input.getText(), repeatKeyField.getText()));
+            }
+        }
+        if(tbtnDecode.isSelected())
+        {
+            if(ciphers[0].isSelected())
+                output[0].setText(AtbashCipher.decode(input.getText()));
+            if(ciphers[1].isSelected()) {
+                    /*gets the first character in the shift textfield and uses that as the ?-shift
+                    input validation will be added later*/
+                if(!validShift(shiftField.getText()))
+                {
+
+                }
+                else
+                    output[1].setText(ShiftCipher.decode(input.getText(), shiftField.getText().charAt(0)));
+
+            }
+            if(ciphers[2].isSelected() && !repeatKeyField.getText().isEmpty()) {
+                    /*gets the String from the repeat textfield and uses that as the keyword
+                    input validation will be added later*/
+                if(repeatKeyField.getText().isEmpty())
+                {
+
+                }
+                else
+                    output[2].setText(RepeatingKeywordCipher.decode(input.getText(), repeatKeyField.getText()));
+            }
+        }
     }
 
 
