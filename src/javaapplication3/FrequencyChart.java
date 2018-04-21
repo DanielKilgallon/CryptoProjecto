@@ -1,6 +1,7 @@
 package javaapplication3;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
@@ -8,48 +9,67 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
-public class FrequencyChart extends Application
+public class FrequencyChart
 {
-
+    private Stage myPlatform;
     private char startingChar;
-    private Set data;
+    private Map data;
+    private CategoryAxis xAxis;
+    private NumberAxis yAxis;
     private XYChart.Series<String, Number> bars;
     private BarChart<String, Number> chart;
 
-    public FrequencyChart(char sc, Set d)
+    public FrequencyChart(char sc, Map d)
     {
         startingChar=sc;
         data=d;
+        bars = new XYChart.Series<>();
 
-        try {
-            this.start(new Stage());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        myPlatform = new Stage();
+
     }
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void setup(){
 
-        chart = new BarChart<String, Number>(new CategoryAxis(), new NumberAxis());
+        xAxis  = new CategoryAxis();
+        //xAxis.setLabel("alphabet");
 
-        bars = new XYChart.Series<String, Number>();
-        bars.getData().add(new XYChart.Data<>("a", 12));
-        bars.getData().add(new XYChart.Data<>("d", 76));
-        bars.getData().add(new XYChart.Data<>("k", 132));
-        bars.getData().add(new XYChart.Data<>("m", 46));
-        bars.getData().add(new XYChart.Data<>("q", 2));
+        yAxis = new NumberAxis();
+        //yAxis.setLabel("counts");
 
-        Scene scene = new Scene(chart, 500,500);
+        //bars.setName("Letters");
+
+        for(char i = 'a'; i<='z'; i++)
+        {
+            bars.getData().add(new XYChart.Data<String, Number>(Character.toString(i), Integer.parseInt(data.get(Character.toString(i)).toString())));
+        }
+
+        chart = new BarChart<>(xAxis, yAxis);
+        chart.setTitle("Frequency Analysis");
         chart.getData().add(bars);
 
-        primaryStage.setScene(scene);
-        primaryStage.show();
+
+
+        Scene scene = new Scene(chart, 500,500);
+
+        myPlatform.setScene(scene);
+       // myPlatform.show();
 
     }
 
-
+    public Stage getGraph(){return myPlatform;}
+    public void updateData(Map d){
+        data =d;
+        bars.getData().clear();
+        for(Object s : data.keySet())
+        {
+            bars.getData().add(new XYChart.Data<String, Number>(s.toString(), Integer.parseInt(data.get(s).toString())));
+        }
+    }
 
 }

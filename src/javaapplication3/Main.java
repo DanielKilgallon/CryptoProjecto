@@ -9,6 +9,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Main extends Application {
 
     private final int NUM_CIPHERS=3;
@@ -141,6 +144,18 @@ public class Main extends Application {
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(root);
         primaryStage.show();
+
+        int count=1;
+        Map<String, Integer> freq = new HashMap<>();
+        for(char i = 'a'; i<='z'; i++)
+        {
+            freq.put(Character.toString(i), count);
+            count+=3;
+        }
+
+        FrequencyChart fc = new FrequencyChart('a', freq);
+        fc.setup();
+        fc.getGraph().show();
     }
 
     private boolean validShift(String s)
