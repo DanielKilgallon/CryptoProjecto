@@ -82,8 +82,9 @@ public class ShiftCipher {
      */
     public static String[] breakCode(String s) {
         String[] possible = new String[26];
-        for (char i = 'a'; i <= 'z'; i++)
-            possible[i - 'a'] = decode(s, i);
+        possible[0]=decode(s,'a');
+        for (char i = 'b'; i <= 'z'; i++)
+            possible[i - 'a'] = "\n-------------\n"+decode(s, i);
 
         return possible;
     }

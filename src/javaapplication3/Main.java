@@ -89,11 +89,15 @@ public class Main extends Application {
         });
         ciphers[1].setOnAction(event -> {
             output[1].setDisable(!output[1].isDisabled());//toggles whether or not the output boxes will be active
-            shiftContainer.setDisable(!shiftContainer.isDisabled());
+            if(tbtnBreak.isSelected()){}//for the "break" option, keep the shift box disabled
+            else
+                shiftContainer.setDisable(!shiftContainer.isDisabled()); //otherwise enable it
         });
         ciphers[2].setOnAction(event -> {
             output[2].setDisable(!output[2].isDisabled());//toggles whether or not the output boxes will be active
-            repeatContainer.setDisable(!repeatContainer.isDisabled());
+            if(tbtnBreak.isSelected()){}//for the "break" option, keep the repeating keyword box disabled
+            else
+                repeatContainer.setDisable(!repeatContainer.isDisabled()); //otherwise enable it
         });
 
         hbMethodChoice.getChildren().addAll(tbtnEncode, tbtnDecode, tbtnBreak);
@@ -235,6 +239,29 @@ public class Main extends Application {
                 }
                 else
                     output[2].setText(RepeatingKeywordCipher.decode(input.getText(), repeatKeyField.getText()));
+            }
+        }
+
+        if(tbtnBreak.isSelected())
+        {
+            if(ciphers[0].isSelected())
+                output[0].setText(AtbashCipher.decode(input.getText()));
+            if(ciphers[1].isSelected()) {
+                //runs through the alphabet and prints all possibilities
+                String[] all = ShiftCipher.breakCode(input.getText());
+                output[1].setText(all[0]);
+                for(int i=1; i<all.length; i++)
+                    output[1].appendText(all[i]);
+            }
+            if(ciphers[2].isSelected() && !repeatKeyField.getText().isEmpty()) {
+                    /*gets the String from the repeat textfield and uses that as the keyword
+                    input validation will be added later*/
+                /*if(!validRepeat(repeatKeyField.getText()))
+                {
+
+                }
+                else
+                    output[2].setText(RepeatingKeywordCipher.decode(input.getText(), repeatKeyField.getText()));*/
             }
         }
     }
