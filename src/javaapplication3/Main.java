@@ -143,23 +143,12 @@ public class Main extends Application {
 
         process.setOnAction(e -> {setupInputToOutput();});
 
+
         Scene root = new Scene(vbMainContain, 300, 500);
         root.getStylesheets().add("resources/Main.css");
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(root);
         primaryStage.show();
-
-        int count=1;
-        Map<String, Integer> freq = new HashMap<>();
-        for(char i = 'a'; i<='z'; i++)
-        {
-            freq.put(Character.toString(i), count);
-            count+=3;
-        }
-
-        FrequencyChart fc = new FrequencyChart('a', freq);
-        fc.setup();
-        fc.getGraph().show();
     }
 
     private boolean validShift(String s)
@@ -253,17 +242,33 @@ public class Main extends Application {
                 for(int i=1; i<all.length; i++)
                     output[1].appendText(all[i]);
             }
+            /*gets the String from the repeat textfield and uses that as the keyword
+            input validation will be added later*/
             if(ciphers[2].isSelected() && !repeatKeyField.getText().isEmpty()) {
-                    /*gets the String from the repeat textfield and uses that as the keyword
-                    input validation will be added later*/
-                /*if(!validRepeat(repeatKeyField.getText()))
-                {
+                String[] freqStrings = RepeatingKeywordCipher.breakCode(input.getText());
+                int length = freqStrings.length;
 
+                //HashMap<Character, Integer> freq = new HashMap<>();
+                int[] freq = new int[26];
+                for (int i = 0; i < 26; i++) {
+                    freq[i] = 0;
                 }
-                else
-                    output[2].setText(RepeatingKeywordCipher.decode(input.getText(), repeatKeyField.getText()));*/
+
+                for (int i = 0; i < length; i++) {
+                    String temp = freqStrings[i];
+                    for(int j = 0; j < temp.length(); j++)
+                    {
+                        freq[temp.charAt(j) - 'a'] =  freq[temp.charAt(j) - 'a'] + 1;
+                        FrequencyChart fc = new FrequencyChart('a', freq);
+                        fc.setup();
+                        fc.getGraph().show();
+                    }
+                }
+
+                //output[2].setText(RepeatingKeywordCipher.breakCode(input.getText()));
+            } else{
             }
-        }
+       }
     }
 
 

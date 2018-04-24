@@ -18,13 +18,13 @@ public class FrequencyChart
 {
     private Stage myPlatform;
     private char startingChar;
-    private Map data;
+    private int[] data;
     private CategoryAxis xAxis;
     private NumberAxis yAxis;
     private XYChart.Series<String, Number> bars;
     private BarChart<String, Number> chart;
 
-    public FrequencyChart(char sc, Map d)
+    public FrequencyChart(char sc, int[] d)
     {
         startingChar=sc;
         data=d;
@@ -46,7 +46,7 @@ public class FrequencyChart
 
         for(char i = 'a'; i<='z'; i++)
         {
-            bars.getData().add(new XYChart.Data<String, Number>(Character.toString(i), Integer.parseInt(data.get(Character.toString(i)).toString())));
+            bars.getData().add(new XYChart.Data<String, Number>(Character.toString(i), data[i]));
         }
 
         chart = new BarChart<>(xAxis, yAxis);
@@ -63,12 +63,13 @@ public class FrequencyChart
     }
 
     public Stage getGraph(){return myPlatform;}
-    public void updateData(Map d){
+    public void updateData(int[] d){
         data =d;
         bars.getData().clear();
-        for(Object s : data.keySet())
+        for(int i = 0; i < data.length; i++)
         {
-            bars.getData().add(new XYChart.Data<String, Number>(s.toString(), Integer.parseInt(data.get(s).toString())));
+            // ((char)(i + 'a')) + "" --> add 'a' to get an int representing a char, casting to a char. Then, add "" to get a string
+            bars.getData().add(new XYChart.Data<String, Number>(((char)(i + 'a')) + "", data[i]));
         }
     }
 
