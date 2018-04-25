@@ -69,6 +69,8 @@ public class RepeatingKeywordCipher {
         int[] tallies = new int[max + 1];
 
         //tallies gcds into array to find most common
+        if (GCDs.size() == 0)
+            return new String[]{};
         for (int i = 0; i < tallies.length; i++)
             tallies[GCDs.get(i)] = tallies[GCDs.get(i)] + 1;
 

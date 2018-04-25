@@ -137,11 +137,11 @@ public class Main extends Application {
         });
 
         //the cipher methods should be called here for active updates to the output areas
-        input.textProperty().addListener( e->{
-           setupInputToOutput();
-        });
+//        input.textProperty().addListener( e->{
+//           setupInputToOutput();
+//        });
 
-        process.setOnAction(e -> {setupInputToOutput();});
+        process.setOnAction(e -> setupInputToOutput());
 
 
         Scene root = new Scene(vbMainContain, 300, 500);
@@ -244,7 +244,7 @@ public class Main extends Application {
             }
             /*gets the String from the repeat textfield and uses that as the keyword
             input validation will be added later*/
-            if(ciphers[2].isSelected() && !repeatKeyField.getText().isEmpty()) {
+            if(ciphers[2].isSelected()) {
                 String[] freqStrings = RepeatingKeywordCipher.breakCode(input.getText());
                 int length = freqStrings.length;
 
@@ -257,13 +257,14 @@ public class Main extends Application {
                 for (int i = 0; i < length; i++) {
                     String temp = freqStrings[i];
                     for(int j = 0; j < temp.length(); j++)
-                    {
-                        freq[temp.charAt(j) - 'a'] =  freq[temp.charAt(j) - 'a'] + 1;
-                        FrequencyChart fc = new FrequencyChart('a', freq);
-                        fc.setup();
-                        fc.getGraph().show();
-                    }
+                        if (temp.charAt(j) <= 'z' && temp.charAt(j) >= 'a')
+                            freq[temp.charAt(j) - 'a'] =  freq[temp.charAt(j) - 'a'] + 1;
+                    FrequencyChart fc = new FrequencyChart('a', freq);
+                    fc.setup();
+                    fc.getGraph().show();
                 }
+
+
 
                 //output[2].setText(RepeatingKeywordCipher.breakCode(input.getText()));
             } else{
