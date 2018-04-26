@@ -1,6 +1,7 @@
 package javaapplication3;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -149,6 +150,8 @@ public class Main extends Application {
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(root);
         primaryStage.show();
+
+//        testFreqChart();
     }
 
     private boolean validShift(String s)
@@ -204,7 +207,7 @@ public class Main extends Application {
                     output[2].setText(RepeatingKeywordCipher.encode(input.getText(), repeatKeyField.getText()));
             }
         }
-        if(tbtnDecode.isSelected())
+        else if(tbtnDecode.isSelected())
         {
             if(ciphers[0].isSelected())
                 output[0].setText(AtbashCipher.decode(input.getText()));
@@ -231,7 +234,7 @@ public class Main extends Application {
             }
         }
 
-        if(tbtnBreak.isSelected())
+        else if(tbtnBreak.isSelected())
         {
             if(ciphers[0].isSelected())
                 output[0].setText(AtbashCipher.decode(input.getText()));
@@ -247,14 +250,12 @@ public class Main extends Application {
             if(ciphers[2].isSelected()) {
                 String[] freqStrings = RepeatingKeywordCipher.breakCode(input.getText());
                 int length = freqStrings.length;
-
-                //HashMap<Character, Integer> freq = new HashMap<>();
                 int[] freq = new int[26];
                 for (int i = 0; i < 26; i++) {
                     freq[i] = 0;
                 }
 
-                for (int i = 0; i < length; i++) {
+                /*for (int i = 0; i < length; i++) {
                     String temp = freqStrings[i];
                     for(int j = 0; j < temp.length(); j++)
                         if (temp.charAt(j) <= 'z' && temp.charAt(j) >= 'a')
@@ -262,7 +263,7 @@ public class Main extends Application {
                     FrequencyChart fc = new FrequencyChart('a', freq);
                     fc.setup();
                     fc.getGraph().show();
-                }
+                }*/
 
 
 
@@ -270,10 +271,58 @@ public class Main extends Application {
             } else{
             }
        }
+
+       else{
+            Alert noSelection = new Alert(Alert.AlertType.ERROR);
+            noSelection.setTitle("Error");
+            noSelection.setHeaderText("No selection was made");
+            noSelection.setContentText("Choose Encode, Decode, or Break");
+
+            noSelection.showAndWait();
+        }
+
     }
 
 
     public static void main(String[] args) {
         launch(args);
     }
+
+    public void testFreqChart()
+    {
+        int[] counts = new int[26];
+        for(int i=0;i<counts.length;i++)
+            counts[i]=2*i;
+
+        Controller control = new Controller();
+
+
+        Stage secondaryStage = new Stage();
+        FrequencyChart fc = new FrequencyChart(counts, control, secondaryStage);
+        Scene root= new Scene(fc.getGraphNode(), 500,300);
+        secondaryStage.setTitle("Frequency counts");
+        secondaryStage.setScene(root);
+        secondaryStage.showAndWait();
+
+        Alert noSelection = new Alert(Alert.AlertType.ERROR);
+        noSelection.setTitle("Error");
+        noSelection.setHeaderText("No selection was made");
+        noSelection.setContentText("Character submitted: " + control.getMsgBetween());
+
+        noSelection.showAndWait();
+
+/*
+        for(int i=0;i<counts.length;i++)
+            counts[i]=2*counts[i];
+
+        FrequencyChart fc2 = new FrequencyChart(counts);
+
+        Stage ternaryStage = new Stage();
+        Scene root2= new Scene(fc2.getGraphNode(), 500,300);
+        ternaryStage.setTitle("Frequency counts");
+        ternaryStage.setScene(root2);
+        ternaryStage.show();*/
+
+    }
+
 }
