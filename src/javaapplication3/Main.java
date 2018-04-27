@@ -248,12 +248,44 @@ public class Main extends Application {
             /*gets the String from the repeat textfield and uses that as the keyword
             input validation will be added later*/
             if(ciphers[2].isSelected()) {
-                String[] freqStrings = RepeatingKeywordCipher.breakCode(input.getText());
+                String formatted = input.getText().replaceAll("\\s", ""); //removes all spaces
+                formatted = formatted.replaceAll("\\W", "");//removes anything that isn't a letter
+                //NOT CURRENTLY WORKING
+                /*String[] freqStrings = RepeatingKeywordCipher.breakCode(formatted); //spaces wreck the char math --- weed them out before calling this function
                 int length = freqStrings.length;
                 int[] freq = new int[26];
                 for (int i = 0; i < 26; i++) {
                     freq[i] = 0;
                 }
+                
+                String keyword="";
+                Controller control = new Controller(); //used to pass strings between the FrequencyChart and the Main classes
+
+                //only goes through the array enough times for the length of the keyword
+                for (int i = 0; i < freqStrings[i].length(); i++) {
+                    for (int j = 0; j < 26; j++) {
+                        freq[j] = 0;
+                    }//resets the counts to 0
+
+                    freqStrings[i].toLowerCase();
+                    for (int k = i; k < freqStrings.length; k+=freqStrings[0].length()) {
+                        char ch = freqStrings[k].charAt(i);
+                        freq[ch-'a'] += 1;
+                    }//counts the letters based on gcd
+                    
+                    Stage secondStage = new Stage();
+                    FrequencyChart fc = new FrequencyChart(freq, control, secondStage);
+                    Scene tempScene = new Scene(fc.getGraphNode());
+                    secondStage.setScene(tempScene);
+                    secondStage.showAndWait();
+                    //displays a frequency chart and waits for input
+                    
+                    keyword += control.getMsgBetween();
+                    //builds up the keyword
+                    
+                }
+                
+                output[2].setText(RepeatingKeywordCipher.decode(input.getText(), keyword));*/
 
                 /*for (int i = 0; i < length; i++) {
                     String temp = freqStrings[i];
