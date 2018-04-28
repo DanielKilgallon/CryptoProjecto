@@ -3,6 +3,8 @@ package javaapplication3;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -48,8 +50,9 @@ public class Main extends Application {
         tgMethodChoice.getToggles().add(tbtnDecode);
         tgMethodChoice.getToggles().add(tbtnBreak);
         tgMethodChoice.getToggles().get(0).setSelected(true); //preselection -- starts with this button toggled
-        vbMainContain = new VBox();
-        hbMethodChoice = new HBox();
+        vbMainContain = new VBox(7);
+        hbMethodChoice = new HBox(7);
+        hbMethodChoice.setAlignment(Pos.CENTER);
 
         ciphers = new CheckBox[NUM_CIPHERS];
         ciphers[0] = new CheckBox("Atbash");
@@ -63,7 +66,7 @@ public class Main extends Application {
         output = new TextArea[NUM_CIPHERS];
         for (int i = 0; i < NUM_CIPHERS; i++) {
             output[i] = new TextArea();
-            output[i].setPromptText("Output will go here...");
+            output[i].setPromptText("Output will appear here...");
             output[i].setWrapText(true);
             output[i].setEditable(false);
             output[i].setDisable(true);
@@ -91,9 +94,11 @@ public class Main extends Application {
         shiftContainer.getChildren().add(new Label("Shift: "));
         shiftContainer.getChildren().add(shiftField);
         shiftContainer.setDisable(true);
+        shiftContainer.setId("shiftcontainers");
         repeatContainer.getChildren().add(new Label("Keyword: "));
         repeatContainer.getChildren().add(repeatKeyField);
         repeatContainer.setDisable(true);
+        repeatContainer.setId("shiftcontainers");
 
 
 
@@ -158,10 +163,15 @@ public class Main extends Application {
         process.setOnAction(e -> setupInputToOutput());
 
 
-        Scene root = new Scene(vbMainContain, 300, 500);
+        Scene root = new Scene(vbMainContain);
         root.getStylesheets().add("resources/Main.css");
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Killow Coder");
         primaryStage.setScene(root);
+        primaryStage.setMinWidth(300);
+        primaryStage.setMinHeight(500);
+        primaryStage.setWidth(450);
+        primaryStage.setHeight(750);
+
         primaryStage.show();
 
 //        testFreqChart();
@@ -180,6 +190,8 @@ public class Main extends Application {
 
     private boolean validRepeat(String s)
     {
+        if(s.isEmpty())
+            return false;
         if(s.length()==0)
             return false;
 
@@ -213,11 +225,12 @@ public class Main extends Application {
                     /*gets the String from the repeat textfield and uses that as the keyword
                     input validation will be added later*/
                 if(!validRepeat(repeatKeyField.getText()))
-                {
+                    repeatKeyField.setId("error");
 
-                }
-                else
+                else {
                     output[2].setText(RepeatingKeywordCipher.encode(input.getText(), repeatKeyField.getText()));
+                    repeatKeyField.setId("");
+                }
             }
         }
         else if(tbtnDecode.isSelected())

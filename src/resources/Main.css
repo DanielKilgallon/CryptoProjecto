@@ -5,56 +5,58 @@ CSS file for styling the main part of the gui
 
 /* Color labels */
 * {
-	-fx-black:      #000000;
-	-fx-white:      #ffffff;
-	-fx-sky:        #caebf2;
+	-fx-black:        #000000;
+	-fx-white:        #ffffff;
+	-fx-sky:          #caebf2;
+	-fx-darkened-sky: #98d8e6;
 	-fx-carbon:       #a9a9a9;
-	-fx-watermelon: #ff3b3f;
-	-fx-neutral:    #efefef;
+	-fx-watermelon:   #ff3b3f;
+	-fx-neutral:      #efefef;
 }
 
 .root{
 	-fx-background-color: -fx-neutral;
-	-fx-padding: 3 3 3 3;
+	-fx-padding: 7;
+	-fx-font-family: 'Courier New';
 }
 
-/* .text-field: disabled{
-	-fx-background-color: -fx-deepjungle;
+.check-box{
+	-fx-background-color: -fx-sky;
+	-fx-padding: 4;
 }
-
-.textarea: disabled{
-	-fx-background-color: -fx-deepjungle;
-} */
 
 .button{
 	-fx-background-color: -fx-sky;
 	-fx-text-fill: -fx-black;
-	/* -fx-border-color: -fx-shadow; */
+	-fx-padding: 5;
+}
+
+.button:pressed{
+	-fx-background-color: -fx-darkened-sky;
 }
 
 .toggle-button{
 	-fx-background-color: -fx-neutral;
-
 }
 
 .toggle-button: selected{
 	-fx-text-fill: -fx-white;
 	-fx-background-color: -fx-carbon;
-	/* -fx-border-color: -fx-jet; */
 }
 
-/* .check-box{
-	-fx-text-fill: -fx-jet;
-} */
+.label{
+	-fx-padding: 4;
+}
+
+.text{
+	-fx-text-fill: -fx-black;
+}
 
 #error{
 	-fx-background-color: -fx-watermelon;
 	-fx-text-fill: -fx-white;
 }
  
-.text{
-	-fx-text-fill: -fx-black;
-}
 
 /*
 keyword: pie
