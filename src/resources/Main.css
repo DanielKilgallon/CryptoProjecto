@@ -1,13 +1,62 @@
-HBox{
-    -fx-alignment: center ;
-    -fx-padding: 10;
+/*
+CSS file for styling the main part of the gui
+
+*/
+
+/* Color labels */
+* {
+	-fx-black:      #000000;
+	-fx-white:      #ffffff;
+	-fx-sky:        #caebf2;
+	-fx-carbon:       #a9a9a9;
+	-fx-watermelon: #ff3b3f;
+	-fx-neutral:    #efefef;
 }
 
-.sliderbuttons{
-    -fx-width: 30%;
+.root{
+	-fx-background-color: -fx-neutral;
+	-fx-padding: 3 3 3 3;
 }
 
-<!--
+/* .text-field: disabled{
+	-fx-background-color: -fx-deepjungle;
+}
+
+.textarea: disabled{
+	-fx-background-color: -fx-deepjungle;
+} */
+
+.button{
+	-fx-background-color: -fx-sky;
+	-fx-text-fill: -fx-black;
+	/* -fx-border-color: -fx-shadow; */
+}
+
+.toggle-button{
+	-fx-background-color: -fx-neutral;
+
+}
+
+.toggle-button: selected{
+	-fx-text-fill: -fx-white;
+	-fx-background-color: -fx-carbon;
+	/* -fx-border-color: -fx-jet; */
+}
+
+/* .check-box{
+	-fx-text-fill: -fx-jet;
+} */
+
+#error{
+	-fx-background-color: -fx-watermelon;
+	-fx-text-fill: -fx-white;
+}
+ 
+.text{
+	-fx-text-fill: -fx-black;
+}
+
+/*
 keyword: pie
 encrypted message: eqi qw behbc xybxoxv eqi qw uc nekwvxbi bcem dn eqi
--->
+*/

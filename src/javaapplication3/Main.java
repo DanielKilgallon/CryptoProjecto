@@ -69,8 +69,21 @@ public class Main extends Application {
             output[i].setDisable(true);
         }
 
+        //input validation for shift and keyword cipher textfields
         shiftField = new TextField();
+        shiftField.textProperty().addListener(e->{
+            if(!validShift(shiftField.getText()) && ciphers[1].isSelected())
+                shiftField.setId("error");
+            else
+                shiftField.setId("");
+        });
         repeatKeyField = new TextField();
+        repeatKeyField.textProperty().addListener(e->{
+            if(!validRepeat(repeatKeyField.getText()) && ciphers[2].isSelected())
+                repeatKeyField.setId("error");
+            else
+                repeatKeyField.setId("");
+        });
 
         shiftContainer = new HBox();
         repeatContainer = new HBox();
@@ -188,12 +201,12 @@ public class Main extends Application {
                     /*gets the first character in the shift textfield and uses that as the ?-shift
                     input validation will be added later*/
                 if(!validShift(shiftField.getText()))
-                {
+                    shiftField.setId("error");
 
-                }
-                else
+                else {
                     output[1].setText(ShiftCipher.encode(input.getText(), shiftField.getText().charAt(0)));
-
+                    shiftField.setId("");
+                }
             }
             if(ciphers[2].isSelected()) {
                 //System.out.println("Repeat listener " + input.getText());
