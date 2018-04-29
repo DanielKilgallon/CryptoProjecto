@@ -78,11 +78,11 @@ public class RepeatingKeywordCipher {
         max = 0;
         int spot = -1; //spot of most common gcd
         for (int i = 0; i < tallies.length; i++) //finds max gcd tally
-            if (tallies[i] > max && i != 2) {
+            if (tallies[i] > max && i != 2 && i != 1) {
                 max = tallies[i];
                 spot = i;
             }
-        int gcd = GCDs.get(spot);
+        int gcd = spot;
 
         //breaks up message into 'gcd' sections
         String[] segments = new String[gcd];
