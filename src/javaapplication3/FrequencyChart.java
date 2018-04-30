@@ -1,5 +1,6 @@
 package javaapplication3;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.chart.BarChart;
@@ -15,6 +16,7 @@ import javafx.stage.Stage;
 public class FrequencyChart
 {
     private VBox myPlatform;
+    private VBox bottomBox;
     private HBox buttonHolder;
     private Button next;
     private Button previous;
@@ -41,11 +43,14 @@ public class FrequencyChart
     }
 
     private void setup(){
+        bottomBox = new VBox();
         buttonHolder = new HBox();
-        next = new Button("next");
+        next = new Button("right");
         next.setOnAction(e -> shift((char)(currentShift-1)));
-        previous = new Button("previous");
+        next.setMinWidth(40);
+        previous = new Button("left");
         previous.setOnAction(e -> shift((char)(currentShift+1)));
+        previous.setMinWidth(40);
         submit = new Button("Submit");
         submit.setOnAction(e-> {
             control.setMsgBetween(lblShift.getText());
@@ -65,10 +70,15 @@ public class FrequencyChart
         HBox shiftBox = new HBox();
         shiftBox.getChildren().add(lblMsg);
         shiftBox.getChildren().add(lblShift);
+        shiftBox.setAlignment(Pos.CENTER);
+        shiftBox.setPadding(new Insets(5));
         buttonHolder.getChildren().add(previous);
         buttonHolder.getChildren().add(next);
-        buttonHolder.getChildren().add(shiftBox);
-        buttonHolder.getChildren().add(submit);
+        buttonHolder.setAlignment(Pos.CENTER);
+        bottomBox.getChildren().add(buttonHolder);
+        bottomBox.getChildren().add(shiftBox);
+        bottomBox.getChildren().add(submit);
+        bottomBox.setAlignment(Pos.CENTER);
 
 
         currentShift='a';
@@ -85,7 +95,7 @@ public class FrequencyChart
         chart.setLegendVisible(false);
         chart.getData().add(bars);
         myPlatform.getChildren().add(chart);
-        myPlatform.getChildren().add(buttonHolder);
+        myPlatform.getChildren().add(bottomBox);
 
     }
 

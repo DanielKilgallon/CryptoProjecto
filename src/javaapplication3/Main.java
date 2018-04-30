@@ -212,25 +212,15 @@ public class Main extends Application {
                 //System.out.println("Shift listener " + input.getText());
                     /*gets the first character in the shift textfield and uses that as the ?-shift
                     input validation will be added later*/
-                if(!validShift(shiftField.getText()))
-                    shiftField.setId("error");
-
-                else {
+                if(validShift(shiftField.getText()))
                     output[1].setText(ShiftCipher.encode(input.getText(), shiftField.getText().charAt(0)));
-                    shiftField.setId("");
-                }
             }
             if(ciphers[2].isSelected()) {
                 //System.out.println("Repeat listener " + input.getText());
                     /*gets the String from the repeat textfield and uses that as the keyword
                     input validation will be added later*/
-                if(!validRepeat(repeatKeyField.getText()))
-                    repeatKeyField.setId("error");
-
-                else {
+                if(validRepeat(repeatKeyField.getText()))
                     output[2].setText(RepeatingKeywordCipher.encode(input.getText(), repeatKeyField.getText()));
-                    repeatKeyField.setId("");
-                }
             }
         }
         else if(tbtnDecode.isSelected())
@@ -240,22 +230,14 @@ public class Main extends Application {
             if(ciphers[1].isSelected()) {
                     /*gets the first character in the shift textfield and uses that as the ?-shift
                     input validation will be added later*/
-                if(!validShift(shiftField.getText()))
-                {
-
-                }
-                else
+                if(validShift(shiftField.getText()))
                     output[1].setText(ShiftCipher.decode(input.getText(), shiftField.getText().charAt(0)));
 
             }
             if(ciphers[2].isSelected() && !repeatKeyField.getText().isEmpty()) {
                     /*gets the String from the repeat textfield and uses that as the keyword
                     input validation will be added later*/
-                if(!validRepeat(repeatKeyField.getText()))
-                {
-
-                }
-                else
+                if(validRepeat(repeatKeyField.getText()))
                     output[2].setText(RepeatingKeywordCipher.decode(input.getText(), repeatKeyField.getText()));
             }
         }
@@ -299,6 +281,7 @@ public class Main extends Application {
                     FrequencyChart fc = new FrequencyChart(freq, control, secondStage);
                     Scene tempScene = new Scene(fc.getGraphNode());
                     secondStage.setScene(tempScene);
+                    secondStage.setTitle("Frequency Analysis");
                     secondStage.setWidth(1080);
                     secondStage.setWidth(720);
                     secondStage.showAndWait();
