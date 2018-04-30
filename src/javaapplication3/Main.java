@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.util.HashMap;
@@ -170,7 +171,7 @@ public class Main extends Application {
         primaryStage.setMinWidth(300);
         primaryStage.setMinHeight(500);
         primaryStage.setWidth(450);
-        primaryStage.setHeight(750);
+        primaryStage.setHeight(550);
 
         primaryStage.show();
 
@@ -278,8 +279,10 @@ public class Main extends Application {
                     }//counts the letters based on gcd
 
                     Stage secondStage = new Stage();
-                    FrequencyChart fc = new FrequencyChart(freq, control, secondStage);
+                    FrequencyChart fc = new FrequencyChart(freq, control, secondStage, keyword, freqStrings.length);
                     Scene tempScene = new Scene(fc.getGraphNode());
+                    secondStage.initModality(Modality.APPLICATION_MODAL);
+                    secondStage.setAlwaysOnTop(true);
                     secondStage.setScene(tempScene);
                     secondStage.setTitle("Frequency Analysis");
                     secondStage.setWidth(1080);

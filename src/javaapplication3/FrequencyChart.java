@@ -31,14 +31,18 @@ public class FrequencyChart
     private BarChart<String, Number> chart;
     private Controller control;
     private Stage stg;
+    private String currentKey;
+    private double keyLength;
 
-    public FrequencyChart(int[] lc, Controller c, Stage s)
+    public FrequencyChart(int[] lc, Controller c, Stage s, String ck, double kl)
     {
         letterCount=lc;
         control = c;
         stg = s;
         bars = new XYChart.Series<>();
         myPlatform = new VBox();
+        currentKey=ck;
+        keyLength=kl;
         setup();
     }
 
@@ -72,11 +76,17 @@ public class FrequencyChart
         shiftBox.getChildren().add(lblShift);
         shiftBox.setAlignment(Pos.CENTER);
         shiftBox.setPadding(new Insets(5));
+        VBox keywordBox = new VBox(8);
+        keywordBox.getChildren().add(new Label("Estimated keyword length: " + (int)keyLength));
+        keywordBox.getChildren().add(new Label("Keyword being built: " + currentKey));
+        keywordBox.setPadding(new Insets(5,5,8,5));
+        keywordBox.setAlignment(Pos.CENTER);
         buttonHolder.getChildren().add(previous);
         buttonHolder.getChildren().add(next);
         buttonHolder.setAlignment(Pos.CENTER);
         bottomBox.getChildren().add(buttonHolder);
         bottomBox.getChildren().add(shiftBox);
+        bottomBox.getChildren().add(keywordBox);
         bottomBox.getChildren().add(submit);
         bottomBox.setAlignment(Pos.CENTER);
 
