@@ -299,6 +299,8 @@ public class Main extends Application {
                     FrequencyChart fc = new FrequencyChart(freq, control, secondStage);
                     Scene tempScene = new Scene(fc.getGraphNode());
                     secondStage.setScene(tempScene);
+                    secondStage.setWidth(1080);
+                    secondStage.setWidth(720);
                     secondStage.showAndWait();
                     //displays a frequency chart and waits for input
 
