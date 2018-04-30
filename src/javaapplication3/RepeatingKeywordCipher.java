@@ -11,7 +11,10 @@ public class RepeatingKeywordCipher {
         msg = msg.toLowerCase();
         StringBuilder stringBuilder = new StringBuilder("");
         for (int i = 0; i < msg.length(); i++)
-            stringBuilder.append(ShiftCipher.encode(msg.charAt(i) + "", keyWord.charAt(i % keyWord.length())));
+            if (!Character.isLetter(msg.charAt(i)))
+                stringBuilder.append(msg.charAt(i));
+            else
+                stringBuilder.append(ShiftCipher.encode(msg.charAt(i) + "", keyWord.charAt(i % keyWord.length())));
         return stringBuilder.toString();
     }
 
@@ -19,7 +22,10 @@ public class RepeatingKeywordCipher {
         msg = msg.toLowerCase();
         StringBuilder stringBuilder = new StringBuilder("");
         for (int i = 0; i < msg.length(); i++)
-            stringBuilder.append(ShiftCipher.decode(msg.charAt(i) + "", keyWord.charAt(i % keyWord.length())));
+            if (!Character.isLetter(msg.charAt(i)))
+                stringBuilder.append(msg.charAt(i));
+            else
+                stringBuilder.append(ShiftCipher.decode(msg.charAt(i) + "", keyWord.charAt(i % keyWord.length())));
         return stringBuilder.toString();
     }
 
@@ -28,6 +34,7 @@ public class RepeatingKeywordCipher {
         //Find GCD - done (partially)
         //Frequency Analysis - done
         //Guess and Check
+        msg = msg.toLowerCase();
         ArrayList<Integer> nums = new ArrayList<>();
 
         //finds combos in message to assess
@@ -101,9 +108,9 @@ public class RepeatingKeywordCipher {
     /**
      * adds the segment of a message using parameters into array for frequency analysis.
      *
-     * @param msg message to parse
-     * @param s array to put section of message into
-     * @param gcd Greatest Common Divisor of keyword
+     * @param msg    message to parse
+     * @param s      array to put section of message into
+     * @param gcd    Greatest Common Divisor of keyword
      * @param offset offset for which section of message
      */
     private static void addSegment(String msg, String[] s, int gcd, int offset) {

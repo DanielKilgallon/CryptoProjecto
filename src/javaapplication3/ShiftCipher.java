@@ -12,7 +12,7 @@ public class ShiftCipher {
      * @return The encoded message.
      */
     public static String encode(String msg, char shift) {
-        char[] english = msg.toCharArray();
+        char[] english = msg.toLowerCase().toCharArray();
         char[] crypto = new char[msg.length()];
         char difference = shift >= 'a' ? 'a' : 'A';
 

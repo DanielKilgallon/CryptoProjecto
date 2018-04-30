@@ -311,21 +311,6 @@ public class Main extends Application {
                  output[2].setText(RepeatingKeywordCipher.decode(input.getText(), keyword));
                 else
                     output[2].setText("Insufficient Data To Break!");
-
-                /*for (int i = 0; i < length; i++) {
-                    String temp = freqStrings[i];
-                    for(int j = 0; j < temp.length(); j++)
-                        if (temp.charAt(j) <= 'z' && temp.charAt(j) >= 'a')
-                            freq[temp.charAt(j) - 'a'] =  freq[temp.charAt(j) - 'a'] + 1;
-                    FrequencyChart fc = new FrequencyChart('a', freq);
-                    fc.setup();
-                    fc.getGraph().show();
-                }*/
-
-
-
-                //output[2].setText(RepeatingKeywordCipher.breakCode(input.getText()));
-            } else{
             }
        }
 
@@ -344,42 +329,4 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
-    public void testFreqChart()
-    {
-        int[] counts = new int[26];
-        for(int i=0;i<counts.length;i++)
-            counts[i]=2*i;
-
-        Controller control = new Controller();
-
-
-        Stage secondaryStage = new Stage();
-        FrequencyChart fc = new FrequencyChart(counts, control, secondaryStage);
-        Scene root= new Scene(fc.getGraphNode(), 500,300);
-        secondaryStage.setTitle("Frequency counts");
-        secondaryStage.setScene(root);
-        secondaryStage.showAndWait();
-
-        Alert noSelection = new Alert(Alert.AlertType.ERROR);
-        noSelection.setTitle("Error");
-        noSelection.setHeaderText("No selection was made");
-        noSelection.setContentText("Character submitted: " + control.getMsgBetween());
-
-        noSelection.showAndWait();
-
-/*
-        for(int i=0;i<counts.length;i++)
-            counts[i]=2*counts[i];
-
-        FrequencyChart fc2 = new FrequencyChart(counts);
-
-        Stage ternaryStage = new Stage();
-        Scene root2= new Scene(fc2.getGraphNode(), 500,300);
-        ternaryStage.setTitle("Frequency counts");
-        ternaryStage.setScene(root2);
-        ternaryStage.show();*/
-
-    }
-
 }
