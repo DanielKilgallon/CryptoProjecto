@@ -30,15 +30,11 @@ public class RepeatingKeywordCipher {
     }
 
     public static String[] breakCode(String msg) {
-        //Friedman Test - done
-        //Find GCD - done (partially)
-        //Frequency Analysis - done
-        //Guess and Check
         msg = msg.toLowerCase();
         ArrayList<Integer> nums = new ArrayList<>();
 
         //finds combos in message to assess
-        for (int i = 3; i < 10; i++) {
+        for (int i = 3; i < 10; i++)
             for (int j = 0; j + i < msg.length(); j++) {
                 String toCompare = msg.substring(j, j + i);
                 for (int k = j + i; k + i < msg.length(); k++) {
@@ -47,10 +43,9 @@ public class RepeatingKeywordCipher {
                         nums.add(k - j);
                 }
             }
-        }
 
 //        //Uncomment if you want to opt into 3 letter combos
-//        if (nums.size() < 2)
+//        if (nums.size() < 10)
 //            for (int j = 0; j + 3 < msg.length(); j++) {
 //                String toCompare = msg.substring(j, j + 3);
 //                for (int k = j + 3; k + 3 < msg.length(); k++) {

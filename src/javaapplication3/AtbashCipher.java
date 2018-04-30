@@ -84,6 +84,6 @@ public class AtbashCipher {
             case 'z':
                 return 'a';
         }
-        return '?'; //theoretically unreachable
+        return c; //returns special character
     }
 }
