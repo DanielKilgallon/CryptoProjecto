@@ -44,6 +44,8 @@ public class RepeatingKeywordCipher {
                 }
             }
 
+        nums = removePrimes(nums);
+
 //        //Uncomment if you want to opt into 3 letter combos
 //        if (nums.size() < 10)
 //            for (int j = 0; j + 3 < msg.length(); j++) {
@@ -92,6 +94,25 @@ public class RepeatingKeywordCipher {
             addSegment(msg, segments, gcd, i);
 
         return segments;
+    }
+
+    private static ArrayList<Integer> removePrimes(ArrayList<Integer> GCDs) {
+        ArrayList<Integer> temp = new ArrayList<>();
+        for (int i = 0; i < GCDs.size(); i++) {
+            int num = GCDs.get(i);
+            if (notPrime(num))
+                temp.add(num);
+            else
+                System.out.println("found prime: " + num);
+        }
+        return temp;
+    }
+
+    private static boolean notPrime(int num) {
+        for (int i = 2; i < num; i++)
+            if (num % i == 0)
+                return true;
+        return false;
     }
 
     static int gcd(int a, int b) {
